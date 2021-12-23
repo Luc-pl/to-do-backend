@@ -82,23 +82,27 @@ class App extends React.Component {
           <ul className="tasks-section__list" id="tasks-list">
             {this.state.tasks.map(({id, name}) => (
               <li key={id} className="task">
-                <input 
-                  type="text" 
-                  className={'task__input' + (id === this.state.editedTask.id ? ' task__input--active' : '')}
-                  autoComplete="off"  
-                  value={id === this.state.editedTask.id ? this.state.editedTask.name : name}
-                  readOnly={id !== this.state.editedTask.id}
-                  onChange={event => this.editTask(event.target.value)}
-                />
+                {name}                
                 <div>
                   { id === this.state.editedTask.id 
-                    ? <button
-                      onClick={this.saveTask}
-                      className="btn btn--blue"
-                    >Save</button> 
+                    ? 
+                    <>
+                      <input 
+                        type="text" 
+                        className={'task__input' + (id === this.state.editedTask.id ? ' task__input--active' : '')}
+                        autoComplete="off"  
+                        value={id === this.state.editedTask.id ? this.state.editedTask.name : name}
+                        readOnly={id !== this.state.editedTask.id}
+                        onChange={event => this.editTask(event.target.value)}
+                      />                    
+                      <button
+                        onClick={this.saveTask}
+                        className="btn btn--blue"
+                      >Save</button> 
+                    </>
                     : <button
                       onClick={() => this.setState({ editedTask: {id, name}})}
-                      className="btn btn--blue"
+                      className="btn btn--green"
                     >Edit</button>
                   }
                   <button 
